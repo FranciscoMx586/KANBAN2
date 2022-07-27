@@ -176,17 +176,20 @@ $conexion = $metodos->conectarBD();
         <div class="registro-chofer" id="formulario-externo">
             <form action="subir-datos.php" class="form-transporte-chofer" method="post">
             <p>Pedidos con Cita</p>
-                    <select required name="cliente" class="controls">
+                    <select required name="id_pedido" class="controls">
                         <?php
-                        $getCita1 = "SELECT * FROM pedidos WHERE Estado = 'Agendado'";
+                        $getCita1 = "SELECT * FROM 
+                        (SELECT cliente.nom_cliente as Cliente, `estado_pedido` as Estado, `archivo_pedido` as Archivo, `fecha_pedido` as Fecha, `hora_pedido` as Hora, `obs_pedido` as Observaciones, pedido.id_pedido as idPedido FROM `pedido`, cliente WHERE pedido.cliente = cliente.id_cliente ORDER BY `Fecha` ASC, hora) 
+                        as pedidosconid WHERE Estado = 'Agendado'";
+
                         $getCita2 = mysqli_query($conexion[0], $getCita1);
 
                         while ($row = mysqli_fetch_array($getCita2)) {
-                            $archivo_trans = $row['Archivo'];
+                            $id_pedido = $row['idPedido'];
                             $cliente_trans = $row['Cliente'];
                             $fecha = $row['Fecha'];
                         ?>
-                            <option value="<?php echo $archivo_trans;  ?>"><?php echo $cliente_trans . "" . $fecha;  ?></option>
+                            <option value="<?php echo $id_pedido;  ?>"><?php echo $cliente_trans . "" . $fecha;  ?></option>
                         <?php
                         }
                         ?>
@@ -215,17 +218,19 @@ $conexion = $metodos->conectarBD();
             <form action="subir-datos.php" method="POST" class="form-transporte-chofer">
                 
             <p>Pedidos con Cita</p>
-                    <select required name="cliente" class="controls">
+                    <select required name="id_pedido" class="controls">
                         <?php
-                        $getCita1 = "SELECT * FROM pedidos WHERE Estado = 'Agendado'";
+                        $getCita1 = "SELECT * FROM 
+                        (SELECT cliente.nom_cliente as Cliente, `estado_pedido` as Estado, `archivo_pedido` as Archivo, `fecha_pedido` as Fecha, `hora_pedido` as Hora, `obs_pedido` as Observaciones, pedido.id_pedido as idPedido FROM `pedido`, cliente WHERE pedido.cliente = cliente.id_cliente ORDER BY `Fecha` ASC, hora) 
+                        as pedidosconid WHERE Estado = 'Agendado'";
                         $getCita2 = mysqli_query($conexion[0], $getCita1);
 
                         while ($row = mysqli_fetch_array($getCita2)) {
-                            $archivo_trans = $row['Archivo'];
+                            $id_pedido = $row['idPedido'];
                             $cliente_trans = $row['Cliente'];
                             $fecha = $row['Fecha'];
                         ?>
-                            <option value="<?php echo $archivo_trans;  ?>"><?php echo $cliente_trans . "" . $fecha;  ?></option>
+                            <option value="<?php echo $id_pedido;  ?>"><?php echo $cliente_trans . "" . $fecha;  ?></option>
                         <?php
                         }
                         ?>
@@ -233,7 +238,7 @@ $conexion = $metodos->conectarBD();
                     </select>
 
                 <p>Chofer designado para el viaje</p>
-                <select required name="cliente" class="controls">
+                <select required name="id_chf" class="controls">
                     <?php
                     $getChofer1 = "SELECT * FROM chofer WHERE id_chf > 1";
                     $getChofer2 = mysqli_query($conexion[0], $getChofer1);
@@ -244,7 +249,7 @@ $conexion = $metodos->conectarBD();
                         $apepad = $row['apeP_chf'];
                         $apemad = $row['apeM_chf'];
                     ?>
-                        <option value="<?php echo $id;  ?>"><?php echo $nombre . "" . $apepad . "" . $apemad;  ?></option>
+                        <option value="<?php echo $id;  ?>"><?php echo $nombre . " " . $apepad . " " . $apemad;  ?></option>
                     <?php
                     }
                     ?>
@@ -252,7 +257,7 @@ $conexion = $metodos->conectarBD();
                 </select>
 
                 <p>Unidad de transporte</p>
-                <select required name="cliente" class="controls">
+                <select required name="id_unid" class="controls">
                     <?php
                     $getUnidad1 = "SELECT * FROM unidad WHERE id_unid > 1";
                     $getUnidad2 = mysqli_query($conexion[0], $getUnidad1);
@@ -262,7 +267,7 @@ $conexion = $metodos->conectarBD();
                         $modelo = $row['model_unid'];
                         $año = $row['año_unid'];
                     ?>
-                        <option value="<?php echo $id;  ?>"><?php echo $modelo . "" . $año;  ?></option>
+                        <option value="<?php echo $id;  ?>"><?php echo $modelo . " " . $año;  ?></option>
                     <?php
                     }
                     ?>

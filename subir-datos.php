@@ -69,9 +69,6 @@ if (isset($_POST['subir-pedido'])) {
     }
 
     if (isset($_POST['transporte-propio'])) {
-
-        $archivo_trans = $_POST['archivo_trans'];
-        header("Location: panel-kanban-logistica.php?res=$archivo_trans");
         
             $id_pedido = $_POST['id_pedido'];
             $id_unidad = $_POST['id_unid'];
@@ -85,30 +82,48 @@ if (isset($_POST['subir-pedido'])) {
         while ($row = mysqli_fetch_array($retval1)){
             $id_cliente = $row['cliente'];
         }
+
+        $query2 = "SELECT * FROM cita WHERE pedido = '$id_pedido'";
+        $retval2 = mysqli_query($conexion[0], $query2);
+
+        while ($row2 = mysqli_fetch_array($retval2)){
+            $id_cita = $row2['id_cita'];
+        }
+
+        $query3 = "INSERT INTO `transporte` (`id_trans`, `tipo_trans`, `nom_trans`, `apeP_trans`, `apeM_trans`,
+         `rfc_trans`, `lictipo_trans`, `licnum_trans`, `tel_trans`, `email_trans`, `direcc_trans`, `obs_trans`, `cita`, `pedido`, `unidad`, `chofer`) 
+        VALUES (NULL, 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$comentarios', '$id_cita', '$id_pedido', '$id_unidad', '$id_chofer')";
+        $retval3 = mysqli_query($conexion[0], $query3);
+
+        if($retval3){
+            header("Location: panel-kanban-logistica.php?res=$id_pedido");
+         }
         
     }
 
     if (isset($_POST['transporte-externo'])) {
+        
 
-        header("Location: panel-kanban-logistica.php?res=2");
-        $archivo_trans = $_POST['cliente'];
+        $id_pedido = $_POST['id_pedido'];
         $nombre = $_POST['Nombre'];
         $apeP = $_POST['apeP'];
         $apeM = $_POST['apeM'];
-        $rfc = $_POST['rfc'];
+
+        $rfc = NULL;
+        $licnum = NULL;
+        $lictipo = $_POST['lictipo'];
+        $tel = NULL;
+        $email = NULL;
+        $direcc = NULL;
+
+        /*$rfc = $_POST['rfc'];
         $licnum = $_POST['licnum'];
         $lictipo = $_POST['lictipo'];
         $tel = $_POST['tel'];
         $email = $_POST['email'];
-        $direcc = $_POST['direcc'];
+        $direcc = $_POST['direcc'];*/
 
         $obs = $_POST['comentarios'];
-
-        $query = "SELECT * FROM pedido WHERE archivo_pedido = '$archivo_trans'";
-        $retval1 = mysqli_query($conexion[0], $query);
-        while ($row = mysqli_fetch_array($retval1)){
-            $id_pedido = $row['id_pedido'];
-        }
 
         $query2 = "SELECT * FROM cita WHERE pedido = '$id_pedido'";
         $retval2 = mysqli_query($conexion[0], $query2);
@@ -122,7 +137,7 @@ if (isset($_POST['subir-pedido'])) {
         $retval3 = mysqli_query($conexion[0], $query3);
 
         if($retval3){
-            header("Location: panel-kanban-logistica.php?res=1");
+            header("Location: panel-kanban-logistica.php?res=$id_pedido");
          }
     }
 
