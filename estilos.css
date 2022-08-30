@@ -1,288 +1,103 @@
-/*ESTILOS GENERALES*/
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-
-body{
-    padding: 2%;
-    font-family: monospace;
-}
-
-/*DISEÑO LOGIN*/
-
-.login-cuerpo{
-    width: 400px;
-    min-width: 300px;
-    border-radius: 10px;
-    border-top-left-radius: 50px;
-    border-bottom-right-radius: 50px;
-    margin:10px;
-    width: 450px;
-    margin: auto;
-    margin-top: 20px;
-    padding: 10px 20px;
-    border-radius: 7px;
-    text-align: center;
-    box-sizing: border-box;
-}
-
-
-.login-cuerpo img{
-    width: 150px;
-    display: block;
-    margin: 20px auto;
-}
-
-.login-cuerpo p{
-    color: #3358ff;
-    font-size: 25px;
-    font-weight: bold;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.login-form input{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border: none;
-    box-sizing: border-box;
-    font-size: 17px;
-    width: 78%;
-    margin: auto;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 4px;
-    color: black;
-}
-
-.login-form input:hover{
-    transition: .5s ;
-    border: 1px solid #3358ff;
-    color: #3358ff;
-}
-
-.login-form button{
-    display: block;
-    text-decoration: none;
-    background: hsl(229, 82%, 65%);
-    color: white;
-    font-size: 17px;
-    width: 78%;
-    margin-top: 25px;
-    height: 40px;
-    margin: auto;
-    margin-top: 10px;
-    border-radius: 4px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.login-form button:hover{
-    background: #3358ff;
-    color: rgba(255, 255, 255, 1) !important;
-    transition: all 0.2s ease;
-    cursor: pointer;
-    border: 2px solid #3358ff;
-}
-
-
-/*IMAGEN DE PROCESO DE LOGISTICA */
-.contenedor-img-proceso{
-    display: flex;
-    justify-content: center; /*ALINEAR MANERA HORIZONTAL*/
-    align-items: center;    /*ALINEAR MANERA VERICAL*/
-}
-.img-proceso{
-    width: 100%;
-    max-width: 1024px;
-    max-height: 576px;
-}
-
-/*Estilos para el encabezado*/
-.header{
-    width: 100%;
-    height: 100px;
-    position: fixed;
-    top: 0;left: 0;
-}
-.container{
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-}
-.container .btn-menu, .logo{
-    float: left;
-    line-height:100px;
-}
-.container .btn-menu label{
-    color: #3358ff;
-    font-size: 25px;
-    cursor: pointer;
-}
-.logo-logistica{
-    height: 60px;
-    width: 160px;
-    margin-left: 10px;
-}
-.container .menu{
-    float: right;
-    line-height: 100px;
-}
-.container .menu a{
-    display: inline-block;
-    padding: 15px;
-    line-height: normal;
-    text-decoration: none;
-    color: #3358ff;
-    transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
-    font-size: 15px;
-    margin-right: 5px;
-}
-.container .menu a:hover{
-    border-bottom: 2px solid #3358ff;
-    padding-bottom: 5px;
-}
-
-/*CSS DE FORMULARIO DE PEDIDO*/
-
-.form-pedido{
-    width: 400px;
-    background-color: #3358ff;
-    font-family: 'calibri';
-    font-size: 17px;
-    color: #fff;
-    margin: auto;
-    margin-top: 100px;
-    padding: 30px;
-    border-radius: 4px;
-}
-
-.form-pedido h2{
-    font-size: 22px;
-    margin-bottom: 20px;
-}
-
-.archivo-pedido{
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    border: 1px solid #3358ff;
-    font-family: 'calibri';
-    font-size: 18px;
-}
-
-.controls{
-    width: 100%;
-    max-width: 100%;
-    min-width: 100%;
-    max-height: 100px;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    border: 1px solid #3358ff;
-    font-family: 'calibri';
-    font-size: 18px;
-}
-
-.boton-pedido{
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    border: 1px solid #3358ff;
-    font-family: 'calibri';
-    font-size: 18px;
-}
-.form-pedido p{
-    text-align: left;
+#formulario-almacen{
+    margin: 0 auto;
+    padding: 1.3em;
+    max-width: 30em;
+    /*background-color: #0D6EFD;*/
+    border: 2px solid #0D6EFD;
+    color: #0D6EFD;
+    border-radius: 20px;
     
 }
 
-/*CSS DE FORMULARIO DE CITA*/
-
-.form-cita{
-    width: 400px;
-    background-color: #3358ff;
-    font-family: 'calibri';
-    font-size: 17px;
-    color: #fff;
-    margin: auto;
-    margin-top: 100px;
-    padding: 30px;
-    border-radius: 4px;
+#formulario-logistica{
+    margin: 0 auto;
+    padding: 1.3em;
+    max-width: 30em;
+    /*background-color: #0D6EFD;*/
+    border: 5px solid #0D6EFD;
+    color: #0D6EFD;
+    border-radius: 20px;
+    
 }
 
-.form-cita h2{
-    font-size: 22px;
-    margin-bottom: 20px;
-}
-
-.boton-cita{
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    border: 1px solid #3358ff;
-    font-family: 'calibri';
-    font-size: 18px;
+#comentarios{
+    resize:none;
+    height: 5em;
 }
 
 
-/*CSS DE FORMULARIO DE TRANSPORTE*/
-
-/*#panel-transporte{
-    overflow: hidden;
-    padding: 1rm;
-}*/
-
-.form-transporte{
-    float: left;
-    margin-left: 170px;
-    margin-right: 50px;
-    width: 400px;
-    background-color: #3358ff;
-    font-family: 'calibri';
-    font-size: 17px;
-    color: #fff;
-    margin-top: 100px;
-    padding: 30px;
-    border-radius: 4px;
+.img-login{
+    width: 150px;
+    display: block;
+    margin: 5px auto;;
 }
 
-.form-transporte-chofer{
-    float: left;
-    width: 400px;
-    background-color: #3358ff;
-    font-family: 'calibri';
-    font-size: 17px;
-    color: #fff;
-    margin-top: 100px;
-    padding: 30px;
-    border-radius: 4px;
+.img-proceso{
+    width: 700px;
+    display: block;
+    margin: 5px auto;;
 }
 
-.form-transporte-chofer h2{
-    font-size: 22px;
-    margin-bottom: 20px;
+.imagen-pedido{
+    align-items: center;
+    width: 250px;
+    display: block;
+    margin: 5px auto;
+    margin-bottom: 5px;
 }
 
-.form-transporte h2{
-    font-size: 22px;
-    margin-bottom: 20px;
+.imagen-pedido:hover{
+    transition: all 0.2s ;
+    transform: scale(1.8);
+    cursor: pointer;
+    
 }
 
-.boton-transporte{
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 16px;
-    border: 1px solid #3358ff;
-    font-family: 'calibri';
-    font-size: 18px;
+#login{
+    margin: 0 auto;
+    padding: 1.3em;
+    max-width: 30em;
 }
 
+.a-nav:hover{
+    cursor: pointer;
+}
+
+#titulo-kanban{
+    color: #0D6EFD;
+    margin-top: 15px;
+}
+#card-pedido{
+    color: #0D6EFD;
+}
+#card-cita{
+    background-color: #0077aB;
+    color: white;
+}
+#card-unidad{
+    background-color: #00B9c2;
+    color: white;
+}
+#card-externo{
+    background-color: #00B9c2;
+    color: white;
+}
+#card-chofer{
+    background-color: #009bdb;
+    color: white;
+}
+#card-carga{
+    background-color: #00adf5;
+    color: white;
+}
+#card-reparto{
+    background-color: #0fb9ff;
+    color: white;
+}
+#card-entrega{
+    background-color: #0077aB;
+    color: white;
+}
 
 /* CSS PANTALLA DE loader*/
 
@@ -341,12 +156,11 @@ body{
     }
 }
 
-/*TABLA DE PEDIDOS*/
-
-.contenedor-pedidos{
-    width: 90%;
-    background-color: #3358ff;
-    margin: 50px auto;
-    display: grid;
-    grid-template-columns: repeat(6,1fr);
+.img-pedido, .img-cita, .img-transporte, .img-carga, .img-reparto, .img-entrega {
+    align-items: center;
+    width: 200px;
+    display: block;
+    
+    margin: 5px auto;
+    margin-bottom: 5px;
 }

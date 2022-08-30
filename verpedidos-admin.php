@@ -17,7 +17,6 @@ $conexion = $metodos->conectarBD();
 <body>
     <header class="header">
         <div class="container">
-
             <nav class="menu">
                 <a href="panel-logistica.php">Inicio</a>
             </nav>
@@ -25,9 +24,14 @@ $conexion = $metodos->conectarBD();
     </header>
     <br><br><br>
     <div class="contenedor-pedidos">
-        <div class="titulo-tabla">Pedidos</div>
+        <div class="title-table">Panel de los Pedidos</div>
         <?php
-        $buscar = "SELECT cliente.nom_cliente as Cliente, `estado_pedido` as Estado, `archivo_pedido` as Archivo, `fecha_pedido` as Fecha, `hora_pedido` as Hora, `obs_pedido` as Observaciones, pedido.id_pedido FROM `pedido`, cliente WHERE pedido.cliente = cliente.id_cliente ORDER BY `Fecha` ASC, hora";
+        $buscar = "SELECT cliente.nom_cliente as Cliente, `estado_pedido` 
+        as Estado, `archivo_pedido` as Archivo, `fecha_pedido` as Fecha, 
+        `hora_pedido` as Hora, `obs_pedido` as Observaciones, pedido.id_pedido 
+        FROM `pedido`, cliente WHERE pedido.cliente = cliente.id_cliente ORDER BY 
+        `Fecha` ASC, hora";
+
         $resultado = mysqli_query($conexion[0], $buscar);
         while ($row = mysqli_fetch_array($resultado)) {
             $cliente = $row['Cliente'];
@@ -35,13 +39,24 @@ $conexion = $metodos->conectarBD();
             $Archivo = $row['Archivo'];
             $fecha = $row['Fecha'];
             $fecha = strtotime($fecha);
-            $fecha = date("d/m", $fecha);
+            $fecha = date("d/m/y", $fecha);
             $id_pedido = $row['id_pedido'];
             $Observaciones = $row['Observaciones'];
         ?>
-            <div>
-                <?php echo $cliente . "&nbsp;&nbsp;&nbsp;" . $fecha . "&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp";
 
+            <div class="card">
+                <?php
+                ?>
+                <div class="item-table">
+                    <p class="titulos-card">Cliente del Pedido</p>
+                    <p class="echo-cliente"><?php echo $cliente; ?></p>
+                    <p class="titulos-card">Fecha del Pedido</p>
+                    <p><?php echo $fecha; ?></p>
+                    <p class="titulos-card">Imagen del Pedido</p>
+                    <p><img src="<?php echo $Archivo; ?>"></p>
+                </div>
+
+                <?php
                 $buscar2 = "SELECT * FROM cita WHERE pedido = $id_pedido";
                 $resultado2 = mysqli_query($conexion[0], $buscar2);
 
@@ -49,11 +64,18 @@ $conexion = $metodos->conectarBD();
                     while ($row2 = mysqli_fetch_array($resultado2)) {
                         $fechacita = $row2['fecha_cita'];
                         $fechacita = strtotime($fechacita);
-                        $fechacita = date("d/m", $fechacita);
+                        $fechacita = date("d/m/y", $fechacita);
                         $horacita = $row2['hora_cita'];
                         $horacita = strtotime($horacita);
                         $horacita = date("H:i", $horacita);
-                        echo $fechacita . "&nbsp;" . $horacita . "&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;";
+                ?>
+                        <div class="item-table">
+                            <p class="titulos-card">Fecha de la Cita</p>
+                            <p><?php echo $fechacita; ?></p>
+                            <p class="titulos-card">Hora del registro de la Cita</p>
+                            <p><?php echo $horacita; ?></p>
+                        </div>
+                        <?php
                     }
 
                     $buscar3 = "SELECT * FROM transporte WHERE pedido = $id_pedido";
@@ -68,16 +90,33 @@ $conexion = $metodos->conectarBD();
                                 $buscarU = "SELECT * FROM unidad WHERE id_unid = $unidad";
                                 $resultadoU = mysqli_query($conexion[0], $buscarU);
                                 while ($rowU = mysqli_fetch_array($resultadoU)) {
-                                    echo $rowU['model_unid'] . "&nbsp;&nbsp;&nbsp;";
+                        ?>
+                                    <div class="item-table">
+                                        <p class="titulos-card">Modelo de la Unidad</p>
+                                        <p><?php echo $rowU['model_unid'];  ?></p>
+                                    </div>
+
+                                <?php
                                 }
 
                                 $buscarC = "SELECT * FROM chofer WHERE id_chf = $chofer";
                                 $resultadoC = mysqli_query($conexion[0], $buscarC);
                                 while ($rowC = mysqli_fetch_array($resultadoC)) {
-                                    echo $rowC['nom_chf'] . "&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;";
+                                ?>
+                                    <div class="item-table">
+                                        <p class="titulos-card">Nombre del Chofer</p>
+                                        <p><?php echo $rowC['nom_chf']."&nbsp;".$rowC['apeP_chf']."&nbsp;".$rowC['apeM_chf']; ?></p>
+                                    </div>
+                                <?php
                                 }
                             } else {
-                                echo "Trans-Externo &nbsp;&nbsp;&nbsp;" . $row3["nom_trans"] . "&nbsp;&nbsp;&nbsp;|| &nbsp;&nbsp;&nbsp;";
+                                ?>
+                                <div class="item-table">
+                                    <p class="titulos-card">Transporte Externo</p>
+                                    <p><?php echo $row3["nom_trans"]; ?></p>
+                                </div>
+
+                                <?php
                             }
 
                             $buscarA = "SELECT * FROM carga WHERE pedido = $id_pedido";
@@ -91,8 +130,12 @@ $conexion = $metodos->conectarBD();
                                     $hora_carga = $rowA['hora_carga'];
                                     $hora_carga = strtotime($hora_carga);
                                     $hora_carga = date("H:i", $hora_carga);
-
-                                    echo $fecha_carga . "&nbsp;" . $hora_carga . "&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;";
+                                ?>
+                                    <div class="item-table">
+                                        <p class="titulos-card">Fecha de Carga</p>
+                                        <p><?php echo $fecha_carga; ?></p>
+                                    </div>
+                                    <?php
                                 }
 
                                 $buscarR = "SELECT * FROM reparto WHERE pedido = $id_pedido";
@@ -105,8 +148,15 @@ $conexion = $metodos->conectarBD();
                                         $hora_rep = $rowR['hora_rep'];
                                         $hora_rep = strtotime($hora_rep);
                                         $hora_rep = date("H:i", $hora_rep);
+                                    ?>
+                                        <div class="item-table">
+                                            <p class="titulos-card">Fecha de Reparto</p>
+                                            <p><?php echo $fecha_rep; ?></p>
+                                            <p class="titulos-card">Hoa de registro de la Entrega</p>
+                                            <p><?php echo $hora_rep; ?></p>
+                                        </div>
 
-                                        echo $fecha_rep . "&nbsp;" . $hora_rep . "&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;";
+                                        <?php
                                     }
 
                                     $buscarE = "SELECT * FROM entrega WHERE pedido = $id_pedido";
@@ -119,31 +169,57 @@ $conexion = $metodos->conectarBD();
                                             $hora_entrega = $rowE['hora_entrega'];
                                             $hora_entrega = strtotime($hora_entrega);
                                             $hora_entrega = date("H:i", $hora_entrega);
-
-                                            echo $fecha_entrega . "&nbsp;" . $hora_entrega . "&nbsp;&nbsp;&nbsp;";
+                                        ?>
+                                            <div class="item-table">
+                                                <p class="titulos-card">Fecha de Entrega</p>
+                                                <p><?php echo $fecha_entrega ?></p>
+                                                <p class="titulos-card">Hora del registro de la Entrega</p>
+                                                <p><?php echo $hora_entrega ?></p>
+                                            </div>
+                                        <?php
                                         }
                                     } else {
-                                        echo "Sin Entrega";
+                                        ?>
+                                        <div class="item-table">
+                                        <p class="tarea-pendiente"><?php echo "SIN ENTREGA"; ?></p>
+                                        </div>
+                                        <?php
                                     }
                                 } else {
-                                    echo "SIN REPARTO";
+                                    ?>
+                                    <div class="item-table">
+                                    <p class="tarea-pendiente"><?php echo "SIN REPARTO"; ?></p>
+                                    </div>
+                                    <?php
                                 }
                             } else {
-                                echo "SIN CARGAS";
+                                ?>
+                                <div class="item-table">
+                                <p class="tarea-pendiente"><?php echo "SIN CARGA"; ?></p>
+                                </div>
+                                <?php
                             }
                         }
                     } else {
-                        echo "SIN TRANSPORTES";
+                        ?>
+                        <div class="item-table">
+                        <p class="tarea-pendiente"><?php echo "SIN TRANSPORTE"; ?></p>
+                        </div>
+                        <?php
                     }
                 } else {
-                    echo "SIN CITA";
+                    ?>
+                    <div class="item-table">
+                        <p class="tarea-pendiente"><?php echo "SIN CITA"; ?></p>
+                    </div>
+                <?php
                 }
 
-                ?> </div>
+                ?>
+            </div>
         <?php } ?>
 
     </div>
-
 
 </body>
 

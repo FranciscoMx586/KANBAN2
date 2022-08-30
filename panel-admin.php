@@ -17,7 +17,7 @@
         <div class="container">
             <nav class="menu">
                 <a href="panel-admin.php">Inicio</a>
-                <a href="verpedidos.php">Ver Pedidos</a>
+                <a href="verpedidos-admin.php">Ver Panel De Pedidos</a>
                 <a href="panel-catalogos.php">Ver catalogos</a>
                 <a class="cerrar-sesion" href="close.php">Cerrar sesion</a>
             </nav>
